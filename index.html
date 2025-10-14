@@ -3,49 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMK ISLAM MALAHAYATI</title>
+    <title>SMKS Islam Malahayati - Website Sekolah</title>
+    
+    <!-- Link ke Font Awesome untuk ikon (ornamen) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        /* CSS sederhana untuk styling navigasi */
+        /* Warna utama: Hijau Toska (#40E0D0), Biru Muda (#ADD8E6), Putih (#FFFFFF) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ADD8E6, #40E0D0); /* Gradasi biru muda ke hijau toska */
+            color: #333;
+        }
+        
         header {
-            background-color: #f0f0f0; /* Warna latar belakang header */
+            background: linear-gradient(to right, #40E0D0, #ADD8E6); /* Gradasi untuk header */
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow modern */
+            animation: fadeIn 1s ease-in;
+        }
+        
+        header h1 {
+            color: #FFFFFF; /* Putih */
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ornamen: Shadow teks */
+        }
+        
+        header p {
+            color: #FFFFFF;
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        
+        /* Menu Hamburger di pojok kiri atas */
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #FFFFFF;
+            animation: pulse 2s infinite; /* Animasi modern: Pulse */
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Awalnya tersembunyi */
+            width: 250px;
+            height: 100%;
+            background: #40E0D0; /* Hijau toska */
+            transition: left 0.5s ease; /* Animasi slide */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Ornamen: Shadow */
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+        
+        .sidebar ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: block;
             padding: 10px;
-            text-align: center; /* Judul di tengah */
+            border-radius: 5px; /* Ornamen: Rounded border */
+            transition: background 0.3s;
         }
-        .nav-menu {
-            float: right; /* Memposisikan navigasi ke kanan */
+        
+        .sidebar ul li a:hover {
+            background: #ADD8E6; /* Biru muda saat hover */
+        }
+        
+        .sidebar.active {
+            left: 0; /* Slide keluar saat aktif */
+        }
+        
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #FFFFFF; /* Putih */
+            border-radius: 10px; /* Ornamen: Rounded corner */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow */
+            animation: fadeIn 1s ease-in 0.5s both; /* Animasi: Fade in */
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        section h2 {
+            color: #40E0D0; /* Hijau toska */
+            border-bottom: 2px solid #ADD8E6; /* Ornamen: Border gradasi */
+            padding-bottom: 10px;
+        }
+        
+        /* Animasi CSS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Testimoni */
+        .testimoni {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .testimoni-item {
+            background: #ADD8E6; /* Biru muda */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow */
+            animation: slideIn 1s ease-in;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        /* Formulir Kontak */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form label {
             margin-top: 10px;
+            color: #40E0D0;
         }
-        .nav-menu a {
-            margin-left: 10px; /* Jarak antara tautan */
-            text-decoration: none; /* Hilangkan garis bawah */
-            color: blue; /* Warna tautan */
+        
+        form input, form textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ADD8E6;
+            border-radius: 5px;
+            transition: border 0.3s;
         }
-        .nav-menu a:hover {
-            color: red; /* Warna saat hover */
+        
+        form input:focus, form textarea:focus {
+            border-color: #40E0D0; /* Hijau toska saat fokus */
+        }
+        
+        form button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #40E0D0;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            animation: fadeIn 1s;
+        }
+        
+        form button:hover {
+            background: #ADD8E6; /* Biru muda saat hover */
+        }
+        
+        /* Responsif Mobile */
+        @media (max-width: 768px) {
+            main {
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .testimoni-item {
+                width: 100%;
+            }
+            
+            .sidebar {
+                width: 200px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <!-- Navigasi di sudut kanan atas -->
-        <div class="nav-menu">
-            <a href="#">Kontak</a> |
-            <a href="#">Login</a> |
-            <a href="#">Daftar</a>
-        </div>
-        <h1>SMK ISLAM MALAHAYATI</h1>
+        <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i> <!-- Ikon hamburger sebagai ornamen -->
+        <h1>SMKS ISLAM MALAHAYATI</h1>
+        <p>Yayasan Bina Bersama Indomas</p>
     </header>
     
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#profil">Profil Sekolah</a></li>
+            <li><a href="#visi-misi">Visi dan Misi</a></li>
+            <li><a href="#program">Program Sekolah</a></li>
+            <li><a href="#kontak">Kontak Sekolah</a></li>
+        </ul>
+    </div>
+    
     <main>
-        <section>
-            <h2>Selamat Datang di Website Resmi SMK ISLAM MALAHAYATI</h2>
-            <p>SMK ISLAM MALAHAYATI adalah sekolah kejuruan yang berfokus pada pendidikan berkualitas dengan nilai-nilai Islam. Kami menawarkan berbagai program keahlian seperti Teknik Komputer, Bisnis, dan Kesehatan untuk mempersiapkan siswa menghadapi dunia kerja.</p>
-            <p>Jika Anda ingin tahu lebih lanjut, silakan klik tautan di atas untuk menghubungi kami, login ke akun siswa, atau mendaftar sebagai siswa baru.</p>
+        <section id="beranda">
+            <h2>Selamat Datang di SMKS Islam Malahayati</h2>
+            <p>SMKS Islam Malahayati adalah sekolah vocational yang berfokus pada pendidikan berkualitas dengan nilai-nilai Islam. Didirikan oleh Yayasan Bina Bersama Indomas, sekolah ini menawarkan lingkungan belajar yang modern, aman, dan inspiratif. Kami berkomitmen untuk membentuk generasi muda yang kompeten, berakhlak, dan siap menghadapi dunia kerja. Dengan fasilitas lengkap dan kurikulum terbaru, siswa kami dilatih untuk menjadi pemimpin di masa depan.</p>
+            <p>Di sini, Anda akan menemukan informasi lengkap tentang sekolah kami, mulai dari profil, visi misi, program studi, hingga cara menghubungi kami. Mari bergabung dan rasakan pengalaman belajar yang luar biasa!</p>
+        </section>
+        
+        <section id="profil">
+            <h2>Profil Sekolah</h2>
+            <p>SMKS Islam Malahayati didirikan pada tahun 2010 di bawah naungan Yayasan Bina Bersama Indomas. Sekolah ini terletak di lokasi strategis di kota, dengan akses mudah dari transportasi umum. Kami memiliki lebih dari 500 siswa dan 50 staf pengajar yang berkualitas. Fasilitas kami meliputi laboratorium komputer, workshop praktik, perpustakaan digital, dan ruang ibadah. Sekolah ini fokus pada pendidikan vocational dengan integrasi nilai-nilai Islam, sehingga siswa tidak hanya pintar secara akademik tapi juga berakhlak mulia.</p>
+            <p>Sebagai sekolah vocational, kami menekankan pada keterampilan praktis yang dibutuhkan di industri. Kami bekerja sama dengan perusahaan lokal untuk program magang, sehingga lulusan kami siap kerja. Dengan desain bangunan modern dan lingkungan hijau, sekolah ini menjadi tempat belajar yang nyaman dan menyenangkan.</p>
+        </section>
+        
+        <section id="visi-misi">
+            <h2>Visi dan Misi</h2>
+            <p><strong>Visi:</strong> Menjadi sekolah vocational terbaik di Indonesia yang menghasilkan lulusan berkualitas, berakhlak Islami, dan kompeten di bidangnya, sehingga mampu berkontribusi pada pembangunan bangsa.</p>
+            <p><strong>Misi:</strong></p>
+            <ul>
+                <li>Menyediakan pendidikan berkualitas dengan kurikulum yang sesuai dengan standar nasional dan internasional.</li>
+                <li>Mengintegrasikan nilai-nilai Islam dalam setiap kegiatan belajar-mengajar.</li>
+                <li>Membangun kemitraan dengan industri untuk program magang dan pelatihan.</li>
+                <li>Menumbuhkan karakter siswa melalui kegiatan ekstrakurikuler dan pengembangan diri.</li>
+                <li>Memastikan fasilitas sekolah modern dan ramah lingkungan untuk mendukung pembelajaran efektif.</li>
+            </ul>
+            <p>Visi dan misi ini menjadi panduan utama kami dalam menjalankan kegiatan sekolah, sehingga setiap siswa dapat berkembang secara optimal.</p>
+        </section>
+        
+        <section id="program">
+            <h2>Program Sekolah</h2>
+            <p>SMKS Islam Malahayati menawarkan berbagai program vocational yang disesuaikan dengan kebutuhan industri. Berikut adalah program utama kami:</p>
+            <ul>
+                <li><strong>TJKT (Teknik Komputer dan Jaringan):</strong> Program ini fokus pada keterampilan IT, seperti instalasi jaringan, pemrograman, dan cybersecurity. Siswa akan belajar membangun sistem komputer modern dan mempersiapkan diri untuk karir sebagai teknisi IT.</li>
+                <li><strong>AKL (Akuntansi dan Keuangan Lembaga):</strong> Program ini mengajarkan manajemen keuangan, akuntansi dasar, dan penggunaan software akuntansi. Siswa dilatih untuk menjadi akuntan profesional yang handal di perusahaan atau lembaga keuangan.</li>
+                <li><strong>AP (Analisis dan Perancangan Sistem):</strong> Program ini menekankan pada desain sistem informasi, analisis data, dan pengembangan aplikasi. Siswa akan belajar menggunakan tools seperti UML dan SQL untuk menciptakan solusi teknologi yang efektif.</li>
+            </ul>
+            <p>Setiap program dilengkapi dengan praktik langsung di laboratorium dan kunjungan industri, sehingga siswa memiliki pengalaman nyata sebelum lulus.</p>
+        </section>
+        
+        <section id="testimoni">
+            <h2>Testimoni Alumni</h2>
+            <div class="testimoni">
+                <div class="testimoni-item">
+                    <p>"SMKS Islam Malahayati telah membekali saya dengan keterampilan IT yang luar biasa. Sekarang saya bekerja sebagai teknisi jaringan di perusahaan besar. Terima kasih atas pendidikan yang berkualitas!" - Ahmad, Alumni TJKT 2020</p>
+                </div>
+                <div class="testimoni-item">
+                    <p>"Program AKL di sini sangat membantu saya memahami dunia keuangan. Saya sekarang menjadi akuntan di bank lokal, dan itu semua berkat guru-guru yang dedikasi." - Siti, Alumni AKL 2019</p>
+                </div>
+                <div class="testimoni-item">
+                    <p>"Belajar di SMKS Islam Malahayati adalah pengalaman terbaik. Visi misi sekolah membuat saya tidak hanya pintar, tapi juga berakhlak baik. Saya merekomendasikan sekolah ini!" - Rina, Alumni AP 2021</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="kontak">
+            <h2>Kontak Sekolah</h2>
+            <p>Untuk informasi lebih lanjut, silakan hubungi kami:</p>
+            <p>Alamat: Jl. Malahayati No. 123, Kota Anda</p>
+            <p>Telepon: (021) 12345678</p>
+            <p>Email: info@smksislammalahayati.ac.id</p>
+            
+            <h3>Formulir Kontak</h3>
+            <form action="#" method="post">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="pesan">Pesan:</label>
+                <textarea id="pesan" name="pesan" rows="5" required></textarea>
+                
+                <button type="submit">Kirim Pesan</button>
+            </form>
         </section>
     </main>
     
     <footer>
-        <p>&copy; 2023 SMK ISLAM MALAHAYATI. Hak Cipta Dilindungi.</p>
+        <p>&copy; 2023 SMKS Islam Malahayati. All rights reserved.</p>
     </footer>
+    
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            } else {
+                sidebar.classList.add('active');
+            }
+        }
+        
+        // Script sederhana untuk smooth scroll saat klik menu
+        document.querySelectorAll('.sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                toggleSidebar(); // Tutup sidebar setelah klik
+            });
+        });
+    </script>
 </body>
-</html>
+    </html>
+    
