@@ -3,320 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMKS Islam Malahayati - Website Sekolah</title>
+    <title>SMKS Islam Malahayati | Yayasan Bina Bersama Indomas</title>
+    <!-- Load Tailwind CSS untuk styling modern dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Link ke Font Awesome untuk ikon (ornamen) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Konfigurasi Tailwind untuk skema warna dan font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toska-main': '#20C997',   /* Hijau Toska Keren */
+                        'biru-muda': '#3399FF',    /* Biru Cerah Enerjik */
+                        'bg-soft': '#F5F9FF',      /* Putih Kebiruan Lembut */
+                        'dark-text': '#1F2937',    /* Teks Gelap */
+                        'accent-dark': '#0056b3',  /* Biru Tua untuk hover */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    // Definisi Keyframes untuk Animasi Modern
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(2deg)' },
+                        },
+                        'pulse-grow': {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.03)' },
+                        }
+                    },
+                    // Penggunaan Animasi
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-grow': 'pulse-grow 3s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
     
     <style>
-        /* Warna utama: Hijau Toska (#40E0D0), Biru Muda (#ADD8E6), Putih (#FFFFFF) */
+        /* CSS Kustom */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #ADD8E6, #40E0D0); /* Gradasi biru muda ke hijau toska */
-            color: #333;
+            background-color: #ffffff;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+            scroll-behavior: smooth;
         }
         
-        header {
-            background: linear-gradient(to right, #40E0D0, #ADD8E6); /* Gradasi untuk header */
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow modern */
-            animation: fadeIn 1s ease-in;
+        /* Gradient Background untuk Hero Section (Penggradasian Warna) */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--tw-colors-biru-muda) 0%, var(--tw-colors-toska-main) 100%);
+            box-shadow: 0 10px 40px rgba(32, 201, 151, 0.5);
         }
-        
-        header h1 {
-            color: #FFFFFF; /* Putih */
-            font-size: 2.5em;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ornamen: Shadow teks */
-        }
-        
-        header p {
-            color: #FFFFFF;
-            font-size: 1.2em;
-            margin: 5px 0;
-        }
-        
-        /* Menu Hamburger di pojok kiri atas */
-        .menu-icon {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #FFFFFF;
-            animation: pulse 2s infinite; /* Animasi modern: Pulse */
-        }
-        
+
+        /* Styling untuk Sidebar (Navigasi Slide-out) */
         .sidebar {
+            width: 280px;
+            height: 100%;
             position: fixed;
             top: 0;
-            left: -250px; /* Awalnya tersembunyi */
-            width: 250px;
-            height: 100%;
-            background: #40E0D0; /* Hijau toska */
-            transition: left 0.5s ease; /* Animasi slide */
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Ornamen: Shadow */
+            left: -280px; /* Sembunyikan di awal */
+            background-color: #ffffff;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+            transition: left 0.4s cubic-bezier(0.7, 0, 0.3, 1); /* Animasi slide yang lebih halus */
+            z-index: 100;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        /* Ornamen Menarik: Elemen Grafis Geometris */
+        .ornamen {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50% 30% 60% 40% / 40% 60% 30% 70%;
+            opacity: 0.15;
+            filter: blur(50px);
+            z-index: 0;
+        }
+        #ornamen1 {
+            top: 5%;
+            left: -100px;
+            background-color: var(--tw-colors-biru-muda);
+            animation: float 8s ease-in-out infinite;
+        }
+        #ornamen2 {
+            bottom: 10%;
+            right: -100px;
+            background-color: var(--tw-colors-toska-main);
+            animation: float 9s ease-in-out infinite reverse;
         }
         
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
+        /* Custom scrollbar style for aesthetic (optional, but good for design) */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        
-        .sidebar ul li {
-            margin: 20px 0;
-        }
-        
-        .sidebar ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1.1em;
-            display: block;
-            padding: 10px;
-            border-radius: 5px; /* Ornamen: Rounded border */
-            transition: background 0.3s;
-        }
-        
-        .sidebar ul li a:hover {
-            background: #ADD8E6; /* Biru muda saat hover */
-        }
-        
-        .sidebar.active {
-            left: 0; /* Slide keluar saat aktif */
-        }
-        
-        main {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #FFFFFF; /* Putih */
-            border-radius: 10px; /* Ornamen: Rounded corner */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow */
-            animation: fadeIn 1s ease-in 0.5s both; /* Animasi: Fade in */
-        }
-        
-        section {
-            margin-bottom: 40px;
-        }
-        
-        section h2 {
-            color: #40E0D0; /* Hijau toska */
-            border-bottom: 2px solid #ADD8E6; /* Ornamen: Border gradasi */
-            padding-bottom: 10px;
-        }
-        
-        /* Animasi CSS */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Testimoni */
-        .testimoni {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        
-        .testimoni-item {
-            background: #ADD8E6; /* Biru muda */
-            padding: 20px;
-            margin: 10px;
+        ::-webkit-scrollbar-thumb {
+            background: var(--tw-colors-toska-main);
             border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ornamen: Shadow */
-            animation: slideIn 1s ease-in;
         }
-        
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-        
-        /* Formulir Kontak */
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        form label {
-            margin-top: 10px;
-            color: #40E0D0;
-        }
-        
-        form input, form textarea {
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ADD8E6;
-            border-radius: 5px;
-            transition: border 0.3s;
-        }
-        
-        form input:focus, form textarea:focus {
-            border-color: #40E0D0; /* Hijau toska saat fokus */
-        }
-        
-        form button {
-            margin-top: 20px;
-            padding: 10px;
-            background: #40E0D0;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            animation: fadeIn 1s;
-        }
-        
-        form button:hover {
-            background: #ADD8E6; /* Biru muda saat hover */
-        }
-        
-        /* Responsif Mobile */
-        @media (max-width: 768px) {
-            main {
-                margin: 10px;
-                padding: 10px;
-            }
-            
-            .testimoni-item {
-                width: 100%;
-            }
-            
-            .sidebar {
-                width: 200px;
-            }
+        ::-webkit-scrollbar-track {
+            background: #e0e0e0;
         }
     </style>
 </head>
-<body>
-    <header>
-        <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i> <!-- Ikon hamburger sebagai ornamen -->
-        <h1>SMKS ISLAM MALAHAYATI</h1>
-        <p>Yayasan Bina Bersama Indomas</p>
-    </header>
-    
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="#profil">Profil Sekolah</a></li>
-            <li><a href="#visi-misi">Visi dan Misi</a></li>
-            <li><a href="#program">Program Sekolah</a></li>
-            <li><a href="#kontak">Kontak Sekolah</a></li>
-        </ul>
+<body class="font-sans text-dark-text">
+
+    <!-- Ornamen Menarik (Animasi) -->
+    <div id="ornamen1" class="ornamen hidden lg:block"></div>
+    <div id="ornamen2" class="ornamen hidden lg:block"></div>
+
+    <!-- Sidebar (Navigasi Slide-out/Strip Tiga) -->
+    <div id="sidebar" class="sidebar">
+        <div class="p-8">
+            <h3 class="text-3xl font-bold text-biru-muda border-b-2 border-toska-main pb-4 mb-8">Menu Cepat</h3>
+            <nav class="space-y-4">
+                <a href="#profil-sekolah" class="menu-link block p-3 rounded-lg text-xl font-medium text-gray-700 hover:bg-bg-soft hover:text-toska-main transition duration-200">
+                    <span class="mr-3">🏫</span> Profil Sekolah
+                </a>
+                <a href="#visi-misi" class="menu-link block p-3 rounded-lg text-xl font-medium text-gray-700 hover:bg-bg-soft hover:text-toska-main transition duration-200">
+                    <span class="mr-3">🎯</span> Visi & Misi
+                </a>
+                <a href="#program" class="menu-link block p-3 rounded-lg text-xl font-medium text-gray-700 hover:bg-bg-soft hover:text-toska-main transition duration-200">
+                    <span class="mr-3">🛠️</span> Program Keahlian
+                </a>
+                <a href="#alumni" class="menu-link block p-3 rounded-lg text-xl font-medium text-gray-700 hover:bg-bg-soft hover:text-toska-main transition duration-200">
+                    <span class="mr-3">🎓</span> Testimoni Alumni
+                </a>
+                <a href="#kontak" class="menu-link block p-3 rounded-lg text-xl font-medium text-gray-700 hover:bg-bg-soft hover:text-toska-main transition duration-200">
+                    <span class="mr-3">📞</span> Kontak Sekolah
+                </a>
+            </nav>
+        </div>
     </div>
-    
-    <main>
-        <section id="beranda">
-            <h2>Selamat Datang di SMKS Islam Malahayati</h2>
-            <p>SMKS Islam Malahayati adalah sekolah vocational yang berfokus pada pendidikan berkualitas dengan nilai-nilai Islam. Didirikan oleh Yayasan Bina Bersama Indomas, sekolah ini menawarkan lingkungan belajar yang modern, aman, dan inspiratif. Kami berkomitmen untuk membentuk generasi muda yang kompeten, berakhlak, dan siap menghadapi dunia kerja. Dengan fasilitas lengkap dan kurikulum terbaru, siswa kami dilatih untuk menjadi pemimpin di masa depan.</p>
-            <p>Di sini, Anda akan menemukan informasi lengkap tentang sekolah kami, mulai dari profil, visi misi, program studi, hingga cara menghubungi kami. Mari bergabung dan rasakan pengalaman belajar yang luar biasa!</p>
-        </section>
-        
-        <section id="profil">
-            <h2>Profil Sekolah</h2>
-            <p>SMKS Islam Malahayati didirikan pada tahun 2010 di bawah naungan Yayasan Bina Bersama Indomas. Sekolah ini terletak di lokasi strategis di kota, dengan akses mudah dari transportasi umum. Kami memiliki lebih dari 500 siswa dan 50 staf pengajar yang berkualitas. Fasilitas kami meliputi laboratorium komputer, workshop praktik, perpustakaan digital, dan ruang ibadah. Sekolah ini fokus pada pendidikan vocational dengan integrasi nilai-nilai Islam, sehingga siswa tidak hanya pintar secara akademik tapi juga berakhlak mulia.</p>
-            <p>Sebagai sekolah vocational, kami menekankan pada keterampilan praktis yang dibutuhkan di industri. Kami bekerja sama dengan perusahaan lokal untuk program magang, sehingga lulusan kami siap kerja. Dengan desain bangunan modern dan lingkungan hijau, sekolah ini menjadi tempat belajar yang nyaman dan menyenangkan.</p>
-        </section>
-        
-        <section id="visi-misi">
-            <h2>Visi dan Misi</h2>
-            <p><strong>Visi:</strong> Menjadi sekolah vocational terbaik di Indonesia yang menghasilkan lulusan berkualitas, berakhlak Islami, dan kompeten di bidangnya, sehingga mampu berkontribusi pada pembangunan bangsa.</p>
-            <p><strong>Misi:</strong></p>
-            <ul>
-                <li>Menyediakan pendidikan berkualitas dengan kurikulum yang sesuai dengan standar nasional dan internasional.</li>
-                <li>Mengintegrasikan nilai-nilai Islam dalam setiap kegiatan belajar-mengajar.</li>
-                <li>Membangun kemitraan dengan industri untuk program magang dan pelatihan.</li>
-                <li>Menumbuhkan karakter siswa melalui kegiatan ekstrakurikuler dan pengembangan diri.</li>
-                <li>Memastikan fasilitas sekolah modern dan ramah lingkungan untuk mendukung pembelajaran efektif.</li>
-            </ul>
-            <p>Visi dan misi ini menjadi panduan utama kami dalam menjalankan kegiatan sekolah, sehingga setiap siswa dapat berkembang secara optimal.</p>
-        </section>
-        
-        <section id="program">
-            <h2>Program Sekolah</h2>
-            <p>SMKS Islam Malahayati menawarkan berbagai program vocational yang disesuaikan dengan kebutuhan industri. Berikut adalah program utama kami:</p>
-            <ul>
-                <li><strong>TJKT (Teknik Komputer dan Jaringan):</strong> Program ini fokus pada keterampilan IT, seperti instalasi jaringan, pemrograman, dan cybersecurity. Siswa akan belajar membangun sistem komputer modern dan mempersiapkan diri untuk karir sebagai teknisi IT.</li>
-                <li><strong>AKL (Akuntansi dan Keuangan Lembaga):</strong> Program ini mengajarkan manajemen keuangan, akuntansi dasar, dan penggunaan software akuntansi. Siswa dilatih untuk menjadi akuntan profesional yang handal di perusahaan atau lembaga keuangan.</li>
-                <li><strong>AP (Analisis dan Perancangan Sistem):</strong> Program ini menekankan pada desain sistem informasi, analisis data, dan pengembangan aplikasi. Siswa akan belajar menggunakan tools seperti UML dan SQL untuk menciptakan solusi teknologi yang efektif.</li>
-            </ul>
-            <p>Setiap program dilengkapi dengan praktik langsung di laboratorium dan kunjungan industri, sehingga siswa memiliki pengalaman nyata sebelum lulus.</p>
-        </section>
-        
-        <section id="testimoni">
-            <h2>Testimoni Alumni</h2>
-            <div class="testimoni">
-                <div class="testimoni-item">
-                    <p>"SMKS Islam Malahayati telah membekali saya dengan keterampilan IT yang luar biasa. Sekarang saya bekerja sebagai teknisi jaringan di perusahaan besar. Terima kasih atas pendidikan yang berkualitas!" - Ahmad, Alumni TJKT 2020</p>
+    <!-- Overlay untuk menutup sidebar di HP/Tablet -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-0 hidden z-90 transition-opacity duration-400" onclick="closeSidebar()"></div>
+
+
+    <!-- Header / Navbar Utama -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Tombol Burger Menu (Strip Tiga) -->
+            <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-bg-soft transition duration-300" onclick="toggleSidebar()">
+                <svg class="w-8 h-8 text-toska-main" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            
+            <!-- Nama Sekolah di Tengah (Mobile Friendly) -->
+            <div class="text-xl font-extrabold text-dark-text truncate">
+                Malahayati SMK
+            </div>
+
+            <!-- Tombol Aksi PPDB -->
+            <a href="#kontak" class="px-5 py-2 bg-biru-muda text-white rounded-full text-sm font-semibold hover:bg-accent-dark transition duration-300 transform hover:scale-105 shadow-md">
+                Daftar PPDB
+            </a>
+        </nav>
+    </header>
+
+    <!-- Sesi Hero - Beranda -->
+    <section id="beranda" class="hero-gradient pt-24 pb-40 text-center text-white relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tight animate-fade-in-up">
+                SMKS ISLAM MALAHAYATI
+            </h1>
+            <p class="text-xl md:text-3xl font-light mb-12 italic animate-fade-in-up" style="animation-delay: 0.3s;">
+                "Yayasan Bina Bersama Indomas"
+            </p>
+            <a href="#program" class="px-10 py-4 rounded-full font-bold bg-white text-dark-text text-lg hover:bg-gray-100 transition duration-300 shadow-xl animate-fade-in-up" style="animation-delay: 0.6s;">
+                JELAJAHI PROGRAM KEAHLIAN
+            </a>
+        </div>
+        <!-- Gelombang Gradien di Bawah Hero (Ornamen) -->
+        <svg class="absolute bottom-0 left-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1" d="M0,64L60,69.3C120,75,240,85,360,106.7C480,128,600,160,720,160C840,160,960,128,1080,128C1200,128,1320,160,1380,176L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
+    </section>
+
+    <!-- Sesi 1: Profil Sekolah -->
+    <section id="profil-sekolah" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-text mb-16 border-b-4 border-biru-muda inline-block pb-3">
+                PROFIL SMKS ISLAM MALAHAYATI
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Teks Informasi -->
+                <div class="space-y-6 lg:order-1 animate-fade-in-up">
+                    <h3 class="text-4xl font-extrabold text-toska-main">Pendidikan Berbasis Akhlak & Kompetensi</h3>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Kami adalah Sekolah Menengah Kejuruan yang mengintegrasikan keunggulan akademik, kompetensi kejuruan yang relevan dengan industri 4.0, dan penanaman nilai-nilai Islam. **SMKS Islam Malahayati** hadir untuk menghasilkan generasi lulusan yang siap kerja, berwirausaha, dan berakhlak mulia.
+                    </p>
+                    <ul class="space-y-3 text-gray-800 font-medium border-l-4 border-biru-muda pl-4">
+                        <li>✅ Kurikulum terkini sesuai standar industri.</li>
+                        <li>✅ Pembelajaran *project-based learning* (PBL).</li>
+                        <li>✅ Lingkungan Islami dan kondusif.</li>
+                        <li>✅ Fasilitas lab dan praktik yang memadai.</li>
+                    </ul>
                 </div>
-                <div class="testimoni-item">
-                    <p>"Program AKL di sini sangat membantu saya memahami dunia keuangan. Saya sekarang menjadi akuntan di bank lokal, dan itu semua berkat guru-guru yang dedikasi." - Siti, Alumni AKL 2019</p>
-                </div>
-                <div class="testimoni-item">
-                    <p>"Belajar di SMKS Islam Malahayati adalah pengalaman terbaik. Visi misi sekolah membuat saya tidak hanya pintar, tapi juga berakhlak baik. Saya merekomendasikan sekolah ini!" - Rina, Alumni AP 2021</p>
+                
+                <!-- Gambar/Visual (Placeholder) -->
+                <div class="relative overflow-hidden rounded-3xl shadow-2xl lg:order-2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <img src="https://placehold.co/600x400/3399FF/ffffff?text=Fasilitas+Lab+TJKT" alt="Laboratorium Sekolah" class="w-full h-auto object-cover transform hover:scale-105 transition duration-500">
+                    <!-- Ornamen badge -->
+                    <div class="absolute top-4 right-4 bg-toska-main text-white font-bold px-4 py-2 rounded-full shadow-lg text-sm">Pusat Keunggulan</div>
                 </div>
             </div>
-        </section>
-        
-        <section id="kontak">
-            <h2>Kontak Sekolah</h2>
-            <p>Untuk informasi lebih lanjut, silakan hubungi kami:</p>
-            <p>Alamat: Jl. Malahayati No. 123, Kota Anda</p>
-            <p>Telepon: (021) 12345678</p>
-            <p>Email: info@smksislammalahayati.ac.id</p>
+        </div>
+    </section>
+
+    <!-- Sesi 2: Visi dan Misi -->
+    <section id="visi-misi" class="py-20 bg-bg-soft">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-text mb-16 border-b-4 border-toska-main inline-block pb-3">
+                VISI & MISI
+            </h2>
             
-            <h3>Formulir Kontak</h3>
-            <form action="#" method="post">
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" required>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Visi Card -->
+                <div class="p-8 rounded-3xl border-4 border-biru-muda/30 shadow-lg bg-white transform hover:shadow-xl transition duration-300 animate-fade-in-up">
+                    <h3 class="text-3xl font-extrabold text-biru-muda mb-4 flex items-center">
+                        <span class="mr-3 text-5xl">🔭</span> Visi Sekolah
+                    </h3>
+                    <p class="text-gray-700 text-lg">
+                        Mewujudkan SMKS Islam Malahayati sebagai **SMK Unggulan yang religius, kompeten, dan adaptif** terhadap perubahan teknologi global demi mencetak tenaga kerja profesional yang berintegritas.
+                    </p>
+                </div>
                 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <!-- Misi Card -->
+                <div class="p-8 rounded-3xl border-4 border-toska-main/30 shadow-lg bg-white transform hover:shadow-xl transition duration-300 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <h3 class="text-3xl font-extrabold text-toska-main mb-4 flex items-center">
+                        <span class="mr-3 text-5xl">📝</span> Misi Sekolah
+                    </h3>
+                    <ul class="space-y-3 text-gray-700 list-none text-md">
+                        <li>1. Mengembangkan potensi siswa berlandaskan Al-Qur'an dan Sunnah.</li>
+                        <li>2. Melaksanakan pembelajaran berbasis teknologi terbaru dan kebutuhan industri.</li>
+                        <li>3. Menguatkan kerjasama (Link & Match) dengan DUDI untuk penempatan kerja.</li>
+                        <li>4. Mendorong jiwa wirausaha dan kemandirian siswa.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sesi 3: Program Keahlian (TJKT, AKL, AP) -->
+    <section id="program" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-text mb-16 border-b-4 border-biru-muda inline-block pb-3">
+                3 PROGRAM KEAHLIAN FAVORIT
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- TJKT Card -->
+                <div class="p-8 bg-bg-soft rounded-2xl shadow-xl border-t-8 border-biru-muda transform hover:scale-[1.02] transition duration-300 animate-fade-in-up">
+                    <div class="text-6xl text-biru-muda mb-4">🖥️</div>
+                    <h3 class="text-2xl font-bold text-dark-text mb-2">TJKT</h3>
+                    <span class="text-sm font-light text-gray-600 italic">Teknik Jaringan Komputer & Telekomunikasi</span>
+                    <p class="text-gray-700 mt-4 text-md">
+                        Program unggulan yang fokus mencetak ahli di bidang instalasi jaringan (LAN/WAN), *cloud computing*, IoT, dan keamanan siber (cybersecurity).
+                    </p>
+                </div>
                 
-                <label for="pesan">Pesan:</label>
-                <textarea id="pesan" name="pesan" rows="5" required></textarea>
+                <!-- AKL Card -->
+                <div class="p-8 bg-bg-soft rounded-2xl shadow-xl border-t-8 border-toska-main transform hover:scale-[1.02] transition duration-300 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="text-6xl text-toska-main mb-4">📈</div>
+                    <h3 class="text-2xl font-bold text-dark-text mb-2">AKL</h3>
+                    <span class="text-sm font-light text-gray-600 italic">Akuntansi & Keuangan Lembaga</span>
+                    <p class="text-gray-700 mt-4 text-md">
+                        Mempelajari sistem akuntansi manual dan digital, perpajakan, dan analisis keuangan. Siap berkarir di sektor perbankan, keuangan, dan bisnis.
+                    </p>
+                </div>
                 
-                <button type="submit">Kirim Pesan</button>
-            </form>
-        </section>
-    </main>
+                <!-- AP Card -->
+                <div class="p-8 bg-bg-soft rounded-2xl shadow-xl border-t-8 border-biru-muda transform hover:scale-[1.02] transition duration-300 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="text-6xl text-biru-muda mb-4">📂</div>
+                    <h3 class="text-2xl font-bold text-dark-text mb-2">AP</h3>
+                    <span class="text-sm font-light text-gray-600 italic">Otomatisasi & Tata Kelola Perkantoran</span>
+                    <p class="text-gray-700 mt-4 text-md">
+                        Menguasai administrasi modern, kearsipan digital, kehumasan, dan kemampuan komunikasi bisnis yang efektif untuk lingkungan kantor profesional.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <footer>
-        <p>&copy; 2023 SMKS Islam Malahayati. All rights reserved.</p>
-    </footer>
-    
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-            } else {
-                sidebar.classList.add('active');
-            }
-        }
-        
-        // Script sederhana untuk smooth scroll saat klik menu
-        document.querySelectorAll('.sidebar a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                toggleSidebar(); // Tutup sidebar setelah klik
-            });
-        });
-    </script>
-</body>
-    </html>
-    
+    <!-- Sesi 4: Testimoni Alumni -->
+    <section id="alumni" class="py-20 hero-gradient relative overflow-hidden">
+        <!-- Ornamen shape di latar testimoni -->
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16 border-b-4 border-white inline-block pb-3">
+                ALUMNI MENCERITAKAN KISAH MEREKA
+            </h2>
+
+            <!-- Slider Testimoni (Animasi Modern) -->
+            <div id="testimonial-slider" class="relative max-w-4xl mx-auto overflow-hidden rounded-2xl bg-white shadow-2xl border-4 border-white/50 animate-pulse-grow">
+                <div class="flex transition-transform duration-700 ease-in-out" id="testimonial-container">
+                    
+                    <!-- Slide 1 (TJKT) -->
+                    <div class="w-full flex-shrink-0 p-10 md:p-16 text-center bg-biru-muda/10 text-dark-text">
+                        <img src="https://placehold.co/100x100/3399FF/ffffff?text=A" alt="Foto Alumni" class="rounded-full w-24 h-24 mx-auto mb-6 border-4 border-biru-muda shadow-md">
+                        <p class="text-xl italic font-medium text-gray-800 mb-8 leading-relaxed">
+                            "Kurikulum TJKT di Malahayati jauh lebih maju dari yang saya bayangkan. Saya langsung diterima di perusahaan IT besar karena sudah menguasai konfigurasi *MikroTik* dan *Server Cloud*."
+                        </p>
+                        <h4 class="font-bold text-toska-main text-xl">Rizky Firmansyah</h4>
+                        <p class="text-sm text-gray-600">Alumni TJKT | Network Specialist, Tech Corp. Indonesia</p>
+                    </div>
+
+                    <!-- Slide 2 (AKL) -->
+                    <div class="w-full flex-shrink-0 p-10 md:p-16 text-center bg-toska-main/10 text-dark-text">
+                        <img src="https://placehold.co/100x100/20C997/ffffff?text=B" alt="Foto Alumni" class="rounded-full w-24 h-24 mx-auto mb-6 border-4 border-toska-main shadow-md">
+                        <p class="text-xl italic font-medium text-gray-800 mb-8 leading-relaxed">
+                            "Pembekalan AKL di sini sangat praktis, terutama dalam penggunaan software akuntansi. Setelah lulus, saya bisa langsung buka jasa pembukuan sendiri. Sekolah ini mengajarkan kemandirian."
+                        </p>
+                        <h4 class="font-bold text-biru-muda text-xl">Siti Nuraini</h4>
+                        <p class="text-sm text-gray-600">Alumni AKL | Wirausaha, Konsultan Keuangan Mikro</p>
+                    </div>
+                </div>
+                
+                <!-- Tombol Navigasi Slider -->
+                <button onclick="prevTestimonial()" class="absolute top-1/2 left-4 transform -translate-y-1/2 p-3 rounded-full bg-white/80 hover:bg-white text-dark-text shadow-lg transition hidden md:block">
+                    &lt;
+                </button>
+                <button onclick="nextTestimonial()" class="absolute top-1/2 right-4 transform -translate-y-1/2 p-3 rounded-full bg-white/80 hover:bg-white text-dark-text shadow-lg transition hidden md:block">
+                    &gt;
+                </button>
+                
+                <!-- Indikator Slide (Mobile Only) -->
+                <div class="flex justify-center space-x-2 py-4 md:hidden" id="slide-indicators">
+                    <!-- Indikator akan dibuat oleh JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sesi 5: Kontak Sekolah & Formulir -->
+    <section id="kontak" class="py-20 bg-bg-soft">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-text mb-16 border-b-4 border-toska-main inline-block pb-3">
+                KONTAK & DAFTAR SISWA BARU
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Informasi Kontak Detail -->
+                <div class="p-8 bg-white rounded-2xl shadow-xl animate-fade-in-up">
+     
